@@ -1,0 +1,1 @@
+The main goal of this project is to build an Agentic RAG that uses live data from Gmail and generates the requested information.
