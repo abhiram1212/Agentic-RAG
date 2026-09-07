@@ -1,7 +1,20 @@
-def main():
-    print("Agentic RAG Gmail project")
-    print("Environment Ready")
+from fastapi import FastAPI
+from pydantic import BaseModel
+import app.agent as agent
 
+app = FastAPI()
 
-if __name__ == "__main__":
-    main()
+class AskRequest(BaseModel):
+    question: str
+
+@app.get("/health")
+def health():
+    return{"status":"ok"}
+
+@app.get("/")
+def project_message():
+    return{"message": "Agentic RAG Gmail API"}
+
+@app.post("/ask")
+def question(request:AskRequest):
+    return{"answer":agent.process_question(request.question)}
